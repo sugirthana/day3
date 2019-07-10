@@ -1,0 +1,477 @@
+1.
+web.xml
+*********
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <display-name>SpringMVC1</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  
+   <servlet>
+      <servlet-name>First</servlet-name>
+      <servlet-class>
+         org.springframework.web.servlet.DispatcherServlet
+      </servlet-class>
+      <load-on-startup>1</load-on-startup>
+   </servlet>
+ 
+   <servlet-mapping>
+      <servlet-name>First</servlet-name>
+      <url-pattern>*.htm</url-pattern>
+   </servlet-mapping>
+</web-app>     	  
+ 
+First-servlet.xml
+***************
+<?xml version="1.0" encoding="UTF-8"?>
+
+ 
+<beans xmlns="http://www.springframework.org/schema/beans"
+   xmlns:context="http://www.springframework.org/schema/context"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="
+   http://www.springframework.org/schema/beans     
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+   http://www.springframework.org/schema/context 
+   http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+ 
+   <context:component-scan base-package="com.dsrc.controller" />
+ 
+   <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+      <property name="prefix" value="/WEB-INF/jsp/" />
+      <property name="suffix" value=".jsp" />
+   </bean>
+ 
+</beans>
+index.jsp
+*********
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+ <title>Spring MVC login example.</title>
+</head>
+<body>
+    <h1 ><a href="login.htm">Login page</a> </h1>
+</body>
+</html>
+login.jsp
+********
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Spring MVC login example.</title>
+</head>
+<body>
+<h1>Welcome to Login</h1>
+</body>
+</html>
+MyController.java
+*****************
+package com.dsrc.controller;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+@Controller
+public class MyController 
+{
+@RequestMapping("/index.htm")  
+	 public String index(HttpServletRequest request, HttpServletResponse response) 
+	 {
+
+		 return "index";
+	 }
+@RequestMapping("/login.htm")  
+	 public String login(HttpServletRequest request, HttpServletResponse response) 
+	 {
+		 return "login";
+	 }
+}
+____________________________________________________________________________________________________________
+2.web.xml
+************
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <display-name>SpringMVC1</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  
+   <servlet>
+      <servlet-name>second</servlet-name>
+      <servlet-class>
+         org.springframework.web.servlet.DispatcherServlet
+      </servlet-class>
+      <load-on-startup>1</load-on-startup>
+   </servlet>
+ 
+   <servlet-mapping>
+      <servlet-name>second</servlet-name>
+      <url-pattern>*.htm</url-pattern>
+   </servlet-mapping>
+</web-app>
+     	  
+second-servlet.xml
+*****************
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+   xmlns:context="http://www.springframework.org/schema/context"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="
+   http://www.springframework.org/schema/beans     
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+   http://www.springframework.org/schema/context 
+   http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+ 
+   <context:component-scan base-package="com.dsrc.controller" />
+ 
+   <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+      <property name="prefix" value="/WEB-INF/jsp/" />
+      <property name="suffix" value=".jsp" />
+   </bean>
+</beans>
+MyController.java
+****************
+package com.dsrc.controller;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+@Controller
+public class MyController
+{
+	@RequestMapping("/index.htm")  
+		 public String index(HttpServletRequest request, HttpServletResponse response) 
+		 {
+			 return "index";
+		 }
+	@RequestMapping("/login.htm")  
+		 public String login(HttpServletRequest request, HttpServletResponse response) 
+		 {
+			 return "login";
+ 	     }
+	@RequestMapping("/home.htm")  
+		 public String home(HttpServletRequest request, HttpServletResponse response) 
+		 {
+			 return "home";
+		 }
+}
+index.jsp
+********
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+ <title>Spring MVC login example.</title>
+</head>
+<body>
+<h1 ><a href="login.htm">Login page</a>
+    </h1>
+</body>
+</html>
+login.jsp
+*******
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<form action="home.htm">
+<h1>Welcome to Login..</h1>
+<input type="submit" value="Home"></form>
+</body>
+</html>
+home.jsp
+**********
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>Welcome Home..</h1>
+</body>
+</html>
+________________________________________________________________________________________________________
+3.
+MyController.java
+***************
+package com.dsrc.controller;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.dsrc.bean.Login;
+@Controller
+public class MyController 
+{
+	@RequestMapping("/index.htm")  
+		 public String index (HttpServletRequest request, HttpServletResponse response) 
+		 {
+    
+			 return "index";
+ 	 }
+	@RequestMapping("/login.htm")  
+	 public String welcome(@ModelAttribute("login") Login log) 
+	 {
+		 return "login";
+ }
+}
+index.jsp
+**********
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<form action= "login.htm" >
+  		Name <input type="text" name="name">
+  		 <input type = "submit" value = "Submit"/>
+ 	</form>
+</body>
+</html>
+login.jsp
+********
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+Name:
+${login.name}
+</body>
+</html>
+login(pojo)
+***********
+package com.dsrc.bean;
+
+public class Login
+{
+private String name;
+
+public String getName() {
+	return name;
+}
+
+public void setName(String name) {
+	this.name = name;
+}
+}
+__________________________________________________________________________________________________________
+4,5.
+index.jsp
+********
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+    <%@taglib uri = "http://www.springframework.org/tags/form" prefix = "form"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<form:form method = "POST" action = "login.htm" modelAttribute="command">
+  		<form:label path = "name">Name</form:label>
+  		<form:input path = "name" />
+  		 <input type = "submit" value = "Submit"/>
+  </form:form> 
+</body>
+</html>
+login.jsp
+********
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+Name:
+${login.name}
+</body>
+</html>
+MyController.java
+****************
+package com.dsrc.controller;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+import com.dsrc.bean.Login;
+
+@Controller
+public class MyController {
+	@RequestMapping(value = "/index.htm", method = RequestMethod.GET)
+		public ModelAndView student(Model model) {
+  
+ 				return new ModelAndView("index","command",new Login());
+		}
+	@RequestMapping("/login.htm")  
+	public String login(HttpServletRequest request, HttpServletResponse response,@ModelAttribute("Login")Login log) {	  
+	   System.out.println(log.getName());	  
+ 			 return "login";
+ 	  }
+}
+______________________________________________________________________________________________________________________
+6.
+INDEX.JSP
+************
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+    <%@taglib uri = "http://www.springframework.org/tags/form" prefix = "form"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<form:form method = "POST" action = "login.htm" modelAttribute="command">
+  		<form:label path = "loginname">Name</form:label>
+  		<form:input path = "loginname" />
+  		<form:label path = "password">password</form:label>
+  		<form:input path = "password" />
+  		 <input type = "submit" value = "Submit"/>
+  </form:form> 
+</body>
+</html>
+SUCCESS.JSP
+***********
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+welcome
+${ASS.loginname}
+</body>
+</html>
+ERROR.JSP
+**********
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+Invalid user.
+</body>
+</html>
+MyController.java
+****************
+package com.dsrc.controller;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.dsrc.bean.Login;
+@Controller
+public class MyController {
+	@RequestMapping(value = "/index.htm", method = RequestMethod.GET)
+		public ModelAndView student(Model model) {
+  
+ 				return new ModelAndView("index","command",new Login());
+		}
+	@RequestMapping("/login.htm")  
+	public String login(HttpServletRequest request, HttpServletResponse response,@ModelAttribute("ASS")Login log,ModelMap model) {
+	  
+	// If the loginname and password is "SA" and "PASS" go to "succes.jsp" page.
+	// Else  to error.jsp
+  if(log.getLoginname().equals("SA") && log.getPassword().equals("PASS"))
+  {
+	  return "success";
+  }
+  else
+  	{
+ 			 return "error";
+ 	  }
+}
+}
+login.java
+**********
+package com.dsrc.bean;
+
+public class Login {
+private String loginname;
+private String password;
+public String getLoginname() {
+	return loginname;
+}
+public void setLoginname(String loginname) {
+	this.loginname = loginname;
+}
+public String getPassword() {
+	return password;
+}
+public void setPassword(String password) {
+	this.password = password;
+}
+}
+
